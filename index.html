@@ -11,28 +11,59 @@
 
     <!-- 自定义样式 -->
     <style>
-        body {
+        /* 整个页面的背景图片和渐变效果 */
+        html, body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://source.unsplash.com/random/1920x1080/?sports'); 
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://source.unsplash.com/random/1920x1080/?sports');
             background-size: cover;
             background-position: center center;
             color: #333;
         }
 
-        h1 {
-            text-align: center;
-            margin: 20px 0;
+        h1, h2 {
             color: #fff;
-            font-weight: bold;
         }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 15px;
-            color: #007bff;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 1200px;
+            padding: 20px;
         }
 
-        /* 视频卡片样式 */
+        .main-content {
+            width: 75%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 20%;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .sidebar h3 {
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
         .video-container {
             display: flex;
             justify-content: space-around;
@@ -53,11 +84,6 @@
             padding: 20px;
             width: 300px;
             margin: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: scale(1.05);
         }
 
         .video-card video {
@@ -74,8 +100,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* 提交按钮样式 */
-        .quiz button {
+        button {
             background-color: #0056b3;
             color: white;
             border: none;
@@ -84,11 +109,26 @@
             cursor: pointer;
         }
 
-        .quiz button:hover {
+        button:hover {
             background-color: #003d82;
         }
 
-        /* 体育明星部分样式 */
+        ul {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        ul li {
+            background: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
         .stars {
             display: flex;
             justify-content: space-around;
@@ -105,11 +145,6 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             width: 150px;
             margin: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .star-card:hover {
-            transform: scale(1.05);
         }
 
         .star-card div {
@@ -139,130 +174,156 @@
             color: white;
         }
     </style>
+
+    <script>
+        let score = 0;
+
+        function showQuiz(videoId, quizId) {
+            const video = document.getElementById(videoId);
+            const quiz = document.getElementById(quizId);
+
+            video.addEventListener('ended', () => {
+                quiz.style.display = 'block';
+            });
+        }
+
+        function checkAnswer(quizId, correctOption) {
+            const quiz = document.getElementById(quizId);
+            const selectedOption = quiz.querySelector('input[name="answer"]:checked');
+
+            if (selectedOption && selectedOption.value === correctOption) {
+                score += 1;
+                alert('回答正确！当前积分：' + score);
+            } else {
+                alert('回答错误！当前积分：' + score);
+            }
+
+            quiz.style.display = 'none';
+        }
+    </script>
+
 </head>
 
 <body>
+    <h1>体育互动平台</h1>
 
-    <div class="container mt-4">
-        <h1>体育互动平台</h1>
+    <div class="container">
+        <div class="main-content">
+            <!-- 第一部分：视频分类 -->
+            <h1>1. 视频分类</h1>
+            <div class="video-container">
+                <div class="video-card">
+                    <h2>Basketball</h2>
+                    <video id="basketballVideo" controls>
+                        <source src="https://raw.githubusercontent.com/jackdreamera/jackdreamera.github.io/main/assets/8a886fa7-ab8b-4aad-9eec-e72038a73545" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div id="basketballQuiz" class="quiz">
+                        <p>篮球比赛中，一个队伍有几名球员同时在场？</p>
+                        <form>
+                            <input type="radio" name="answer" value="5"> 5<br>
+                            <input type="radio" name="answer" value="7"> 7<br>
+                            <input type="radio" name="answer" value="9"> 9<br>
+                            <button type="button" onclick="checkAnswer('basketballQuiz', '5')">提交答案</button>
+                        </form>
+                    </div>
+                </div>
 
-        <!-- 第一部分：视频分类 -->
-        <h2>1. 视频分类</h2>
-        <div class="video-container">
-            <div class="video-card">
-                <h3>篮球</h3>
-                <video id="basketballVideo" controls>
-                    <source src="https://raw.githubusercontent.com/jackdreamera/jackdreamera.github.io/main/assets/8a886fa7-ab8b-4aad-9eec-e72038a73545" type="video/mp4">
-                    您的浏览器不支持视频播放。
-                </video>
-                <div id="basketballQuiz" class="quiz">
-                    <p>篮球比赛中，一个队伍有几名球员同时在场？</p>
-                    <form>
-                        <input type="radio" name="answer" value="5"> 5<br>
-                        <input type="radio" name="answer" value="7"> 7<br>
-                        <input type="radio" name="answer" value="9"> 9<br>
-                        <button type="button" class="btn btn-primary" onclick="checkAnswer('basketballQuiz', '5')">提交答案</button>
-                    </form>
+                <div class="video-card">
+                    <h2>Football</h2>
+                    <video id="footballVideo" controls>
+                        <source src="https://raw.githubusercontent.com/jackdreamera/jackdreamera.github.io/main/assets/ce6ebce1-9500-4e21-b484-0987fe17f268" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div id="footballQuiz" class="quiz">
+                        <p>足球比赛中，正常比赛时间是多长？</p>
+                        <form>
+                            <input type="radio" name="answer" value="60"> 60分钟<br>
+                            <input type="radio" name="answer" value="90"> 90分钟<br>
+                            <input type="radio" name="answer" value="120"> 120分钟<br>
+                            <button type="button" onclick="checkAnswer('footballQuiz', '90')">提交答案</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <h2>Badminton</h2>
+                    <video id="badmintonVideo" controls>
+                        <source src="https://raw.githubusercontent.com/jackdreamera/jackdreamera.github.io/main/assets/fef66306-5ffa-4dbe-8236-0e75767dd96c" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <div id="badmintonQuiz" class="quiz">
+                        <p>羽毛球比赛中，一局需要多少分获胜？</p>
+                        <form>
+                            <input type="radio" name="answer" value="15"> 15分<br>
+                            <input type="radio" name="answer" value="21"> 21分<br>
+                            <input type="radio" name="answer" value="25"> 25分<br>
+                            <button type="button" onclick="checkAnswer('badmintonQuiz', '21')">提交答案</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-            <div class="video-card">
-                <h3>足球</h3>
-                <video id="footballVideo" controls>
-                    <source src="https://raw.githubusercontent.com/jackdreamera/jackdreamera.github.io/main/assets/ce6ebce1-9500-4e21-b484-0987fe17f268" type="video/mp4">
-                    您的浏览器不支持视频播放。
-                </video>
-                <div id="footballQuiz" class="quiz">
-                    <p>足球比赛中，正常比赛时间是多长？</p>
-                    <form>
-                        <input type="radio" name="answer" value="60"> 60分钟<br>
-                        <input type="radio" name="answer" value="90"> 90分钟<br>
-                        <input type="radio" name="answer" value="120"> 120分钟<br>
-                        <button type="button" class="btn btn-primary" onclick="checkAnswer('footballQuiz', '90')">提交答案</button>
-                    </form>
+            <p style="text-align: center;">（观看视频后用户回答问题，答对加积分）</p>
+
+            <!-- 第二部分：积分奖励机制 -->
+            <h1>2. 积分奖励机制</h1>
+            <ul>
+                <li>帽子 — 100积分</li>
+                <li>衣服 — 500积分</li>
+                <li>鞋子 — 1000积分</li>
+            </ul>
+
+            <!-- 第三部分：体育明星 -->
+            <h1>3. 体育明星名片</h1>
+            <div class="stars">
+                <div class="star-card">
+                    <div></div>
+                    <p>生活简介...</p>
+                </div>
+                <div class="star-card">
+                    <div></div>
+                    <p>生活简介...</p>
+                </div>
+                <div class="star-card">
+                    <div></div>
+                    <p>生活简介...</p>
                 </div>
             </div>
 
-            <div class="video-card">
-                <h3>羽毛球</h3>
-                <video id="badmintonVideo" controls>
-                    <source src="https://raw.githubusercontent.com/jackdreamera/jackdreamera.github.io/main/assets/fef66306-5ffa-4dbe-8236-0e75767dd96c" type="video/mp4">
-                    您的浏览器不支持视频播放。
-                </video>
-                <div id="badmintonQuiz" class="quiz">
-                    <p>羽毛球比赛中，一局需要多少分获胜？</p>
-                    <form>
-                        <input type="radio" name="answer" value="15"> 15分<br>
-                        <input type="radio" name="answer" value="21"> 21分<br>
-                        <input type="radio" name="answer" value="25"> 25分<br>
-                        <button type="button" class="btn btn-primary" onclick="checkAnswer('badmintonQuiz', '21')">提交答案</button>
-                    </form>
-                </div>
+            <!-- 第四部分：建议栏 -->
+            <h1>4. 建议栏</h1>
+            <textarea placeholder="请输入您的建议..."></textarea>
+            <div style="text-align: center;">
+                <button>提交</button>
             </div>
         </div>
 
-        <p class="text-center">（观看视频后用户回答问题，答对加积分）</p>
-
-        <!-- 第二部分：积分奖励机制 -->
-        <h2>2. 积分奖励机制</h2>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">帽子 — 100积分</li>
-            <li class="list-group-item">衣服 — 500积分</li>
-            <li class="list-group-item">鞋子 — 1000积分</li>
-        </ul>
-
-        <!-- 第三部分：体育明星 -->
-        <h2>3. 体育明星名片</h2>
-        <div class="stars">
-            <div class="star-card">
-                <div class="bg-secondary" style="width: 100px; height: 150px;"></div>
-                <p>生活简介...</p>
-            </div>
-            <div class="star-card">
-                <div class="bg-secondary" style="width: 100px; height: 150px;"></div>
-                <p>生活简介...</p>
-            </div>
-            <div class="star-card">
-                <div class="bg-secondary" style="width: 100px; height: 150px;"></div>
-                <p>生活简介...</p>
-            </div>
+        <!-- 右侧修饰部分 -->
+        <div class="sidebar">
+            <h3>热门话题</h3>
+            <ul>
+                <li><a href="#">体育新闻 1</a></li>
+                <li><a href="#">体育新闻 2</a></li>
+                <li><a href="#">体育新闻 3</a></li>
+            </ul>
+            <h3>联系社交媒体</h3>
+            <ul>
+                <li><a href="#">微博</a></li>
+                <li><a href="#">微信</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
         </div>
-
-        <!-- 第四部分：建议栏 -->
-        <h2>4. 建议栏</h2>
-        <textarea placeholder="请输入您的建议..."></textarea>
-
-        <footer>
-            <p>&copy; 2024 体育互动平台. 保留所有权利。</p>
-        </footer>
     </div>
 
-    <!-- 引入Bootstrap的JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <footer>
+        &copy; 2024 体育互动平台
+    </footer>
 
-    <!-- JavaScript逻辑 -->
     <script>
-        function checkAnswer(quizId, correctAnswer) {
-            const quiz = document.getElementById(quizId);
-            const selectedAnswer = quiz.querySelector('input[name="answer"]:checked');
-            if (selectedAnswer && selectedAnswer.value === correctAnswer) {
-                alert("回答正确！");
-            } else {
-                alert("回答错误，请再试一次！");
-            }
-            quiz.style.display = 'none'; // 隐藏问答
-        }
-
-        // 视频播放完成后显示问答
-        const basketballVideo = document.getElementById('basketballVideo');
-        basketballVideo.onended = () => document.getElementById('basketballQuiz').style.display = 'block';
-
-        const footballVideo = document.getElementById('footballVideo');
-        footballVideo.onended = () => document.getElementById('footballQuiz').style.display = 'block';
-
-        const badmintonVideo = document.getElementById('badmintonVideo');
-        badmintonVideo.onended = () => document.getElementById('badmintonQuiz').style.display = 'block';
+        showQuiz('basketballVideo', 'basketballQuiz');
+        showQuiz('footballVideo', 'footballQuiz');
+        showQuiz('badmintonVideo', 'badmintonQuiz');
     </script>
 </body>
 

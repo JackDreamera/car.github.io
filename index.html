@@ -27,27 +27,25 @@
         display: block;
       }
       .video-section {
-		display: flex;
-		flex-direction: column; /* 改为垂直方向排列 */
-		align-items: center; /* 居中对齐 */
-		margin: 40px 0;
-		}
-		.video-box {
-		width: 80%; /* 增大视频框的宽度 */
-		text-align: center;
-		margin-bottom: 30px; /* 视频框之间的间距 */
-		}
-		.video-box video {
-		width: 100%; /* 使视频充满视频框 */
-		height: 400px; /* 增大视频的高度 */
-		object-fit: cover;
-		}
-		.video-box h3 {
-		margin: 10px 0;
-		}
-		.video-box p {
-		font-size: 14px;
-		}
+        display: block; /* 改为块级布局，使视频竖排显示 */
+        margin: 40px 0;
+      }
+      .video-box {
+        width: 100%; /* 每个视频框宽度设置为100% */
+        margin-bottom: 40px; /* 每个视频框之间的间距 */
+        text-align: center;
+      }
+      .video-box video {
+        width: 80%; /* 视频宽度设置为框的80%，可以根据需要调整 */
+        height: 500px; /* 设置更大的视频高度 */
+        object-fit: cover; /* 保持视频比例并充满框 */
+      }
+      .video-box h3 {
+        margin: 10px 0;
+      }
+      .video-box p {
+        font-size: 14px;
+      }
       .custom-section {
         margin: 40px 0;
         text-align: center;
@@ -105,7 +103,6 @@
     </div>
     <div class="page">
       <!-- Page Header -->
-
       <header class="section page-header">
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar rd-navbar-corporate">
@@ -202,26 +199,23 @@
       </section>
 
       <!-- Suggestions Form -->
-	<section class="section section-sm section-last bg-default text-left">
-	  <div class="container">
-		<article class="title-classic">
-		  <div class="title-classic-title">
-			<h3>建议栏</h3>
-		  </div>
-		  <div class="title-classic-text">
-			<p>如果您有任何建议，请点击下方按钮，我们会尽快回复您。</p>
-		  </div>
-		</article>
-		<div class="text-center" style="margin-top: 20px;"> <!-- 添加 margin-top -->
-		  <a class="button button-primary button-pipaluk" href="https://www.wjx.cn/m/43161071.aspx" target="_blank">
-			提交建议
-		  </a>
-		</div>
-	  </div>
-	</section>
-
-
-
+      <section class="section section-sm section-last bg-default text-left">
+        <div class="container">
+          <article class="title-classic">
+            <div class="title-classic-title">
+              <h3>建议栏</h3>
+            </div>
+            <div class="title-classic-text">
+              <p>如果您有任何建议，请点击下方按钮，我们会尽快回复您。</p>
+            </div>
+          </article>
+          <div class="text-center" style="margin-top: 20px;">
+            <a class="button button-primary button-pipaluk" href="https://www.wjx.cn/m/43161071.aspx" target="_blank">
+              提交建议
+            </a>
+          </div>
+        </div>
+      </section>
 
       <footer class="section footer-corporate context-dark">
         <div class="footer-corporate-inset">
@@ -258,11 +252,9 @@
                 <div class="oh-desktop">
                   <div class="wow slideInDown" data-wow-delay="0s">
                     <h6 class="text-spacing-100 text-uppercase">Popular news</h6>
-                    <!-- Post Minimal 2-->
                     <article class="post post-minimal-2">
                       <p class="post-minimal-2-title"><a href="#">Your Personal Guide to 5 Best Places to Visit on Earth</a></p>
                     </article>
-                    <!-- Post Minimal 2-->
                     <article class="post post-minimal-2">
                       <p class="post-minimal-2-title"><a href="#">Top 10 Hotels: Rating by Wonder Tour Travel Experts</a></p>
                     </article>
